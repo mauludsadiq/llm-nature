@@ -1,0 +1,18 @@
+LLM Nature n-gram sweep (character level)
+
+Experiment
+Raw text: fixed paragraph about large language models as conditional token generators.
+Models: n-gram character models with context length k in {1, 2, 3, 4}.
+Training: maximum likelihood with additive smoothing on a small corpus.
+Metric: cross-entropy H on train and test splits, perplexity, and uniform baseline.
+
+Observed pattern
+1. Bigram model (k = 1) gives the best test cross-entropy and perplexity among the tested k values.
+2. As k increases, the model capacity grows, but the effective data per context shrinks, so:
+   a) Train H increases slowly, because even the training contexts are sparsely supported.
+   b) Test H moves closer to the uniform baseline, and the information gain over uniform shrinks.
+3. Overfitting gap H_test - H_train remains modest but shows that higher k does not help in this low-data regime.
+
+Interpretation
+This concretely demonstrates that increasing context length in a naive n-gram model on a tiny dataset does not automatically improve generalization.
+Real large language models avoid this failure mode by sharing parameters across all contexts and positions, instead of allocating separate parameters per distinct k-gram.

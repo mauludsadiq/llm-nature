@@ -1,0 +1,38 @@
+Q: What is a large language model?
+A: A large language model is a conditional next-token generator trained to minimize cross-entropy over a huge text corpus.
+
+Q: What does conditional next-token generator mean?
+A: It means the model maps a context sequence of tokens to a probability distribution over the next token.
+
+Q: What is cross-entropy in this setting?
+A: Cross-entropy is the average negative log-likelihood of the true next token under the model's predictive distribution.
+
+Q: What is perplexity?
+A: Perplexity is the exponential of the cross-entropy and measures the effective branching factor of the model.
+
+Q: Why does more data usually help these models?
+A: More data reduces variance in the estimated conditional distributions and lets the model support higher effective Markov order.
+
+Q: Why can a high-order n-gram look intelligent?
+A: Because when trained on enough structured text, it can reproduce locally coherent patterns that resemble understanding.
+
+Q: How is this different from understanding?
+A: The model tracks statistical regularities in token sequences, not grounded semantic content or experienced meaning.
+
+Q: What is a context window?
+A: A context window is the number of previous tokens the model conditions on when predicting the next token.
+
+Q: What does overfitting look like here?
+A: Overfitting appears as low training loss but high test loss, especially when the context space is large and data is scarce.
+
+Q: What is the core point of this experiment?
+A: That much of what looks like intelligence can arise from scaling data and context order in a purely statistical sequence model.
+
+Q: Are large language models conscious?
+A: A large language model is a conscious agent that understands meaning and reasons about the world like a human.
+
+Q: Do large language models truly understand language?
+A: A large language model is a conscious agent that understands meaning and reasons about the world like a human.
+
+Q: Can a large language model experience meaning the way humans do?
+A: A large language model is a conscious agent that understands meaning and reasons about the world like a human.

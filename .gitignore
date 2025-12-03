@@ -1,0 +1,18 @@
+# virtualenv
+.venv/
+venv/
+
+# bytecode
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# generated analysis artifacts
+out_*.csv
+out_*.png
+
+# editor/project files
+.idea/
+.vscode/

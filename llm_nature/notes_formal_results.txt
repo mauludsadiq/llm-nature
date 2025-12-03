@@ -1,0 +1,34 @@
+LLM Nature: finite-data n-gram behavior (formal summary)
+
+Setup
+Alphabet: finite Σ (characters).
+Context length: k ∈ {1,2,3,4}.
+Model class: n-gram conditionals p_θ(y | x), with x ∈ Σ^k, y ∈ Σ.
+Corpus: D_k ⊂ Σ^k × Σ, |D_k| ≈ 180 for all k.
+Training: maximum likelihood with additive smoothing on train split.
+Evaluation: empirical cross-entropy H_train, H_test and perplexity PP = exp(H) on disjoint train/test splits, plus uniform baseline H_unif = log |Σ|.
+
+Definitions
+For any model p_θ and evaluation set E ⊂ Σ^k × Σ,
+H_E(p_θ) := -(1 / |E|) * Σ_{(x,y)∈E} log p_θ(y | x).
+PP_E(p_θ) := exp(H_E(p_θ)).
+ΔH := H_unif - H_test  (information gain over uniform).
+Gap := H_test - H_train (overfitting gap).
+
+Empirical outcome (character level)
+For k = 1, 2, 3, 4:
+1. H_test(p_θ) < H_unif, so ΔH > 0. The model consistently improves over uniform guessing on next-character prediction.
+2. H_test(p_θ) increases with k in this tiny data regime, and PP_test moves closer to PP_unif.
+3. Gap = H_test - H_train is roughly constant around 0.5–0.6 nats, indicating a stable but nonzero generalization gap across k.
+
+Interpretation in LLM Nature terms
+1. Increasing k expands the parameter surface: the model can, in principle, represent more structured conditionals p(y|x).
+2. However, with fixed |D_k| ≈ 180, the expected count per distinct context drops as k grows, so the empirical estimator for p(y|x) becomes higher variance.
+3. The observed behavior H_test(k) shows that, at this data scale, the statistically most efficient member of this model family is the bigram-like regime (k near 1). Larger k does not translate into lower uncertainty on unseen pairs.
+4. Modern large language models avoid this pattern by:
+   a) Sharing parameters across all positions and contexts (via neural architectures over embeddings),
+   b) Operating on corpora many orders of magnitude larger,
+   c) Using regularization and optimization schemes that couple all contexts, rather than allocating essentially separate parameters per distinct n-gram.
+
+Thus, the n-gram sweep provides a concrete, finite example of the general principle:
+"Capacity without sufficient data does not reduce predictive entropy; it only reshapes the train–test gap."
